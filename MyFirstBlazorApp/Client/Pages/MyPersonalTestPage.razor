@@ -1,0 +1,13 @@
+﻿@page "/mytestpage" 
+@using System;
+
+<MyTestComponent Name=@staticName FamilyName="@staticFamilyName" Age="@dynamicAge"/>
+
+
+@code {
+    private string staticName = "Nansi";
+    private string staticFamilyName = "Yancheva";
+
+    int dynamicAge = new Random().Next();
+
+}

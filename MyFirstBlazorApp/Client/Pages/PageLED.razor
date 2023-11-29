@@ -1,0 +1,63 @@
+﻿@page "/LED"
+@using MyFirstBlazorApp.Client.Components
+
+<h2>Page LED Demos</h2>
+<p></p>
+<p></p>
+<h4>1.Literals</h4>
+<p></p>
+<MyHeader Text="Hello" Visible=true/>
+<p></p>
+<p></p>
+<h4>2.Expressions</h4>
+<p></p>
+<h5>2.1.Simple Expressions</h5>
+<p></p>
+<input value=@InputSize />
+<input value=@DoubleInputSize() />
+<MyHeader Text=@HeaderText Visible=@HeaderVisible />
+<p></p>
+<input value=@(InputSize * 3) />
+<input value=@($"Size is {InputSize}") />
+<input value=@($"Size is {DoubleInputSize()}") />
+<p></p>
+<p></p>
+<h5>2.2.Expressions that evaluate to complex types</h5>
+<p></p>
+<div class="row">
+    <div class="col-4">To HTML attribute using .ToString()</div>
+    <div class="col-8"><input readonly value=@MyPerson /></div>
+</div>
+<p></p>
+<p></p>
+<h5>2.3.HTML </h5>
+<p></p>
+<div class="row">
+    <div class="col-4">To HTML attribute using .ToString()</div>
+    <div class="col-8"><input readonly value="Mr Peter Morris" /></div>
+</div>
+
+@code {
+    //for simple expressions
+    int InputSize = 8;
+    bool HeaderVisible = true;
+    string HeaderText = "Value of variable";
+
+    private int DoubleInputSize()
+    {
+        return InputSize * 2;
+    }
+    //for expressions that evaluate to complex types
+    Person MyPerson;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        MyPerson = new Person
+            {
+                Salutation = "Mr",
+                GivenName = "Peter",
+                FamilyName = "Morris"
+            };
+    }
+}

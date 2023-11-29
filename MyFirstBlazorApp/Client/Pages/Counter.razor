@@ -1,0 +1,22 @@
+﻿@*URL required to render the content of this page. More advanced routing techniques will be covered in the Routing section.*@
+@page "/counter" 
+
+@*standart HTML with implemented code section with'@'*@
+
+<MySecondComponent CurrentCounterValue=@currentCount />
+
+<MyFirstComponent CurrentCounterValue =@firstComponenCount/>
+
+
+<button class="btn btn-primary" @onclick=IncrementCounter>Increment counter</button>
+
+@*programmable content - This is where we write our properties / methods, event handlers, or whatever else we need.*@
+@code {
+    private int firstComponenCount = 4;
+    private int currentCount = 42;
+
+    private void IncrementCounter()
+    {
+        currentCount++;
+    }
+}

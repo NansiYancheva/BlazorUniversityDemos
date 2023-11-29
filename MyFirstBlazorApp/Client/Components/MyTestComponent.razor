@@ -1,0 +1,15 @@
+﻿<div> 
+    My Name is @Name. My FamilyName is @FamilyName. My random age is @Age
+</div>
+
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string FamilyName { get; set; }
+
+    [Parameter]
+    public int Age { get; set; }
+}
