@@ -1,22 +1,44 @@
-﻿@*URL required to render the content of this page. More advanced routing techniques will be covered in the Routing section.*@
-@page "/counter" 
+﻿@page "/counter" 
 
-@*standart HTML with implemented code section with'@'*@
 
 <MySecondComponent CurrentCounterValue=@currentCount />
 
 <MyFirstComponent CurrentCounterValue =@firstComponenCount/>
 
-
 <button class="btn btn-primary" @onclick=IncrementCounter>Increment counter</button>
+<p></p>
+<input type="text" @bind="text" @oninput="TextChanged" />
 
-@*programmable content - This is where we write our properties / methods, event handlers, or whatever else we need.*@
 @code {
     private int firstComponenCount = 4;
     private int currentCount = 42;
+    private string text = "";
 
-    private void IncrementCounter()
+
+
+    private async Task IncrementCounter()
     {
         currentCount++;
+        if (currentCount % 3 == 0)
+        {
+            await OnMultipleOfThree.InvokeAsync(currentCount);
+        }
     }
+
+      private async Task TextChanged(ChangeEventArgs e)
+    {
+        text = e.Value.ToString();
+
+        // Invoke the OnTextChanged event callback with the updated text
+        await OnTextChanged.InvokeAsync(text);
+    }
+
+
+    //component event
+   // This event is essentially a callback that can be invoked when a certain condition is met 
+    [Parameter]
+    public EventCallback<int> OnMultipleOfThree { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnTextChanged { get; set; }
 }
