@@ -2,8 +2,10 @@
 
 Int Event Component
 <p></p>
+<li>Last multiple of two = @LastMultipleOfTwo</li>
+<p></p>
 Last multiple of three = @LastMultipleOfThree
-<Counter OnMultipleOfThree=@UpdateLastMultipleOfThreeValue />
+<Counter OnMultipleOfThree=@UpdateLastMultipleOfThreeValue OnMultipleOfTwoAction=@UpdateLastMultipleOfTwoValue />
 
 <p></p>
 
@@ -15,6 +17,7 @@ String Event Component
 
 @code
 {
+    int LastMultipleOfTwo = 0;
     int LastMultipleOfThree = 0;
     //The UpdateLastMultipleOfThreeValue method gets the int value because
     //it is specified as the event handler for the OnMultipleOfThree event,
@@ -24,6 +27,11 @@ String Event Component
     {
         LastMultipleOfThree = value;
     }
+    private void UpdateLastMultipleOfTwoValue(int value)
+    {
+        LastMultipleOfTwo = value;
+    }
+
 
     //string event component
     private string lastTextChange = "";

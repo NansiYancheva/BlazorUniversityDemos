@@ -1,0 +1,18 @@
+﻿@page "/example"
+
+<h3>Async Example</h3>
+
+<p>@message</p>
+
+@code {
+    private string message = "Initial message";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate an asynchronous operation (e.g., fetching data from a server)
+        await Task.Delay(2000);
+
+        // Update the message after the operation is complete
+        message = "Message after async operation is complete!";
+    }
+}

@@ -5,20 +5,35 @@
 
 <MyFirstComponent CurrentCounterValue =@firstComponenCount/>
 
+<p>Current count: @currentCount</p>
+
+
 <button class="btn btn-primary" @onclick=IncrementCounter>Increment counter</button>
 <p></p>
 <input type="text" @bind="text" @oninput="TextChanged" />
 
 @code {
     private int firstComponenCount = 4;
-    private int currentCount = 42;
+    private int currentCount = 0;
     private string text = "";
 
+    [Parameter]
+    public Action<int> OnMultipleOfTwoAction { get; set; }
+    //component event
+    // This event is essentially a callback that can be invoked when a certain condition is met
+    [Parameter]
+    public EventCallback<int> OnMultipleOfThree { get; set; }
 
+    [Parameter]
+    public EventCallback<string> OnTextChanged { get; set; }
 
     private async Task IncrementCounter()
     {
         currentCount++;
+        if (currentCount % 2 == 0)
+        {
+            OnMultipleOfTwoAction?.Invoke(currentCount);
+        }
         if (currentCount % 3 == 0)
         {
             await OnMultipleOfThree.InvokeAsync(currentCount);
@@ -34,11 +49,4 @@
     }
 
 
-    //component event
-   // This event is essentially a callback that can be invoked when a certain condition is met 
-    [Parameter]
-    public EventCallback<int> OnMultipleOfThree { get; set; }
-
-    [Parameter]
-    public EventCallback<string> OnTextChanged { get; set; }
 }
